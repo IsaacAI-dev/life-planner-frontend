@@ -1,0 +1,16 @@
+import puppeteer from 'puppeteer';
+const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+const page = await browser.newPage();
+await page.setViewport({ width: 1280, height: 900 });
+await page.goto('http://localhost:3210/', { waitUntil: 'networkidle0' });
+await page.screenshot({ path: '/tmp/home-top.png' });
+await page.evaluate(() => window.scrollTo(0, 1400));
+await new Promise((r) => setTimeout(r, 600));
+await page.screenshot({ path: '/tmp/home-mid.png' });
+await page.evaluate(() => window.scrollTo(0, 3200));
+await new Promise((r) => setTimeout(r, 600));
+await page.screenshot({ path: '/tmp/home-pricing.png' });
+await page.goto('http://localhost:3210/today', { waitUntil: 'networkidle0' });
+await page.screenshot({ path: '/tmp/app-signin.png' });
+await browser.close();
+console.log('done');

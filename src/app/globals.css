@@ -1,0 +1,346 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------
+   Design tokens. Dark is the default; `data-theme="light"` on <html>
+   swaps the same variable names so no component needs a light variant.
+   --------------------------------------------------------------- */
+
+:root {
+  --body: #100d17;
+  --bg-app: #141019;
+  --app-bg:
+    radial-gradient(900px 620px at 8% -6%, rgba(167, 139, 250, 0.18), transparent 60%),
+    radial-gradient(820px 600px at 102% 4%, rgba(52, 221, 224, 0.11), transparent 55%),
+    radial-gradient(760px 720px at 78% 104%, rgba(244, 114, 182, 0.1), transparent 55%), #141019;
+
+  --surface-1: #17131f;
+  --surface-2: #1a1626;
+  --surface-3: #161320;
+  --surface-4: #221e33;
+  --surface-input: #1e1a2b;
+
+  --hero-1: #241d3a;
+  --hero-2: #1a1426;
+  --bubble: #201b30;
+  --bubble-ink: #d9d2ec;
+
+  --line: #241f38;
+  --line-2: #2a2540;
+  --line-3: #2c2740;
+  --line-strong: #3e3858;
+  --line-dash: #3d3660;
+
+  --text: #f2ecfb;
+  --text-2: #e9e4f5;
+  --text-3: #c2bad4;
+
+  --muted: #9990ac;
+  --muted-2: #7e7597;
+  --muted-3: #6e6688;
+  --muted-4: #5b5475;
+
+  --violet-ink: #c4b6ff;
+  --violet-ink-2: #b79cff;
+  --pink-ink: #f472b6;
+  --red-ink: #f87171;
+  --amber-ink: #f0a93b;
+  --cyan-ink: #38d6ee;
+  --green-ink: #5be49b;
+  --orange-ink: #fb923c;
+
+  --sidebar-bg: rgba(23, 19, 31, 0.82);
+  --header-bg: rgba(20, 16, 25, 0.72);
+  --scrim: rgba(10, 8, 16, 0.74);
+  --shadow: rgba(0, 0, 0, 0.6);
+  --on-accent: #141019;
+
+  --accent: linear-gradient(135deg, #f472b6, #a78bfa 50%, #34dde0);
+
+  /* Driven by the text-size control in Settings. */
+  --ui-scale: 1;
+}
+
+[data-theme='light'] {
+  --body: #f4f1fa;
+  --bg-app: #f7f5fc;
+  --app-bg:
+    radial-gradient(900px 620px at 8% -6%, rgba(167, 139, 250, 0.22), transparent 60%),
+    radial-gradient(820px 600px at 102% 4%, rgba(52, 221, 224, 0.16), transparent 55%),
+    radial-gradient(760px 720px at 78% 104%, rgba(244, 114, 182, 0.13), transparent 55%), #f7f5fc;
+
+  --surface-1: #ffffff;
+  --surface-2: #ffffff;
+  --surface-3: #f3f0f9;
+  --surface-4: #f1ecf8;
+  --surface-input: #f6f3fc;
+
+  --hero-1: #eee7fc;
+  --hero-2: #faf6ff;
+  --bubble: #f1ecf8;
+  --bubble-ink: #2b2440;
+
+  --line: #e7e1f3;
+  --line-2: #e2dbf0;
+  --line-3: #e2dbf0;
+  --line-strong: #cdc4e3;
+  --line-dash: #cbc2e2;
+
+  --text: #1b1626;
+  --text-2: #241e33;
+  --text-3: #4b4363;
+
+  --muted: #6b6383;
+  --muted-2: #7a7194;
+  --muted-3: #847ba0;
+  --muted-4: #a79fbe;
+
+  --violet-ink: #6b48d4;
+  --violet-ink-2: #7a54e0;
+  --pink-ink: #db2777;
+  --red-ink: #dc2626;
+  --amber-ink: #b45309;
+  --cyan-ink: #0e7490;
+  --green-ink: #15803d;
+  --orange-ink: #c2410c;
+
+  --sidebar-bg: rgba(255, 255, 255, 0.88);
+  --header-bg: rgba(255, 255, 255, 0.8);
+  --scrim: rgba(40, 30, 60, 0.42);
+  --shadow: rgba(60, 45, 95, 0.22);
+  --on-accent: #141019;
+}
+
+/* Expose the tokens above as Tailwind utilities (bg-surface-2, text-muted, …). */
+@theme inline {
+  --color-body: var(--body);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-4: var(--surface-4);
+  --color-surface-input: var(--surface-input);
+  --color-hero-1: var(--hero-1);
+  --color-hero-2: var(--hero-2);
+  --color-bubble: var(--bubble);
+  --color-bubble-ink: var(--bubble-ink);
+
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-line-3: var(--line-3);
+  --color-line-strong: var(--line-strong);
+  --color-line-dash: var(--line-dash);
+
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-muted-3: var(--muted-3);
+  --color-muted-4: var(--muted-4);
+
+  --color-violet-ink: var(--violet-ink);
+  --color-violet-ink-2: var(--violet-ink-2);
+  --color-pink-ink: var(--pink-ink);
+  --color-red-ink: var(--red-ink);
+  --color-amber-ink: var(--amber-ink);
+  --color-cyan-ink: var(--cyan-ink);
+  --color-green-ink: var(--green-ink);
+  --color-orange-ink: var(--orange-ink);
+  --color-on-accent: var(--on-accent);
+
+  --font-display: var(--font-outfit), system-ui, sans-serif;
+  --font-sans: var(--font-hanken), system-ui, sans-serif;
+}
+
+html {
+  font-size: calc(16px * var(--ui-scale));
+}
+
+body {
+  margin: 0;
+  background: var(--body);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(167, 139, 250, 0.3);
+}
+
+:focus-visible {
+  outline: 2px solid var(--violet-ink-2);
+  outline-offset: 2px;
+}
+
+/*
+ * Form fields draw their own rounded focus ring (see Input.tsx) instead of
+ * the square native outline, which otherwise sits outside the pill/rounded
+ * container and reads as a stray double border.
+ */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+@keyframes railslide {
+  0% {
+    left: -42%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes breathe-dawn {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 22px rgba(224, 177, 132, 0.34);
+  }
+  50% {
+    transform: scale(1.07);
+    box-shadow: 0 0 40px rgba(224, 177, 132, 0.6);
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, var(--surface-2) 20%, var(--surface-4) 50%, var(--surface-2) 80%);
+  background-size: 220% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.animate-railslide {
+  animation: railslide 1.15s ease-in-out infinite;
+}
+
+.animate-breathe-dawn {
+  animation: breathe-dawn 1.7s ease-in-out infinite;
+}
+
+.bg-accent {
+  background: var(--accent);
+}
+
+.text-accent {
+  background: var(--accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Marketing site scope. The Aurora design has no light variant, so
+   these tokens are pinned regardless of the signed-in app's theme —
+   a visitor's OS or account preference never changes the marketing
+   pages. Prefixed to avoid any collision with the app's own tokens.
+   --------------------------------------------------------------- */
+
+.lp {
+  --lp-bg: #141019;
+  --lp-art:
+    radial-gradient(1100px 700px at 6% -8%, rgba(167, 139, 250, 0.2), transparent 60%),
+    radial-gradient(900px 640px at 104% 2%, rgba(52, 221, 224, 0.12), transparent 55%),
+    radial-gradient(900px 800px at 70% 108%, rgba(244, 114, 182, 0.11), transparent 55%);
+
+  --lp-surf: #17131f;
+  --lp-surf-2: #1a1626;
+  --lp-surf-3: #221e33;
+  --lp-surf-in: #1e1a2b;
+
+  --lp-line: #241f38;
+  --lp-line-2: #2a2540;
+  --lp-line-str: #3e3858;
+
+  --lp-tx: #f2ecfb;
+  --lp-tx-2: #c2bad4;
+  --lp-tx-3: #9990ac;
+  --lp-tx-4: #6e6688;
+
+  --lp-ac: #c4b6ff;
+  --lp-ac-2: #34dde0;
+  --lp-ac-3: #f472b6;
+  --lp-grad: linear-gradient(135deg, #f472b6, #a78bfa 55%, #34dde0);
+
+  --lp-r: 18px;
+  --lp-r-sm: 12px;
+  --lp-r-lg: 26px;
+  --lp-r-pill: 999px;
+
+  --lp-pill: rgba(167, 139, 250, 0.14);
+  --lp-pill-bd: rgba(167, 139, 250, 0.28);
+  --lp-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  --lp-glow: 0 0 70px rgba(167, 139, 250, 0.22);
+  --lp-rule: linear-gradient(90deg, transparent, var(--lp-line-2) 12%, var(--lp-line-2) 88%, transparent);
+
+  background: var(--lp-art), var(--lp-bg);
+  background-attachment: fixed;
+  color: var(--lp-tx);
+  font-family: var(--font-hanken), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+}
+
+.lp a {
+  color: var(--lp-ac);
+  text-decoration: none;
+}
+.lp a:hover {
+  color: var(--lp-tx);
+}
+
+@keyframes lpFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-11px);
+  }
+}
+
+@keyframes lpDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(24px, -18px, 0) scale(1.08);
+    opacity: 1;
+  }
+}

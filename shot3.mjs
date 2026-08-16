@@ -1,0 +1,17 @@
+import puppeteer from 'puppeteer';
+const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+const page = await browser.newPage();
+await page.setViewport({ width: 1280, height: 900 });
+await page.goto('http://localhost:3210/about', { waitUntil: 'networkidle0' });
+await page.screenshot({ path: '/tmp/about-fixed.png' });
+await page.goto('http://localhost:3210/careers', { waitUntil: 'networkidle0' });
+await page.screenshot({ path: '/tmp/careers-fixed.png' });
+await page.setViewport({ width: 390, height: 844, isMobile: true });
+await page.goto('http://localhost:3210/', { waitUntil: 'networkidle0' });
+await page.screenshot({ path: '/tmp/mobile-hero.png' });
+const pricing = await page.$('#lp-pricing');
+if (pricing) await pricing.scrollIntoView();
+await new Promise((r) => setTimeout(r, 400));
+await page.screenshot({ path: '/tmp/mobile-pricing.png' });
+await browser.close();
+console.log('done');
